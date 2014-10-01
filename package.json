@@ -1,0 +1,16 @@
+{
+  "name": "dns-server",
+  "version": "0.0.1",
+  "description": "Simple DNS server for local vhosts",
+  "main": "server.js",
+  "scripts": {
+    "test": "sudo node test.js",
+    "start": "node server.js"
+  },
+  "repository": "/Users/dj/Projects/dns-server/.git",
+  "author": "DJ Madeira",
+  "license": "ISC",
+  "dependencies": {
+    "node-named": "0.0.1"
+  }
+}
