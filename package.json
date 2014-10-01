@@ -7,7 +7,7 @@
     "test": "sudo node test.js",
     "start": "node server.js"
   },
-  "repository": "/Users/dj/Projects/dns-server/.git",
+  "repository": "https://github.com/djmadeira/node-dns-server.git",
   "author": "DJ Madeira",
   "license": "ISC",
   "dependencies": {
