@@ -4,28 +4,30 @@ var os = require('os');
 var server = named.createServer();
 var interfaces = os.networkInterfaces();
 
-var hostname = '127.0.0.1';
-for (var i=0; i<interfaces.en1.length; i++) {
-  if (interfaces.en1[i].family === 'IPv4') {
-    hostname = interfaces.en1[i].address;
-    break;
-  }
-}
-
-module.exports = function (hosts) {
+module.exports = function (data) {
   function domainMatchesFilters (domain) {
-    for (var host in hosts) {
-      if (typeof hosts[host] === 'string') {
-        if (domain === hosts[host]) {
+    for (var i=0, j=data.hosts.length; i<j; i++) {
+      if ( typeof data.hosts[i].substring(0,1) === '/' ) {
+        if (domain.match(data.hosts[i])) {
           return true;
         }
       } else {
-        if (domain.match(hosts[host])) {
+        if ( domain === data.hosts[i] ) {
           return true;
         }
       }
     }
     return false;
+  }
+
+  var hostname = data.serverHost;
+  if (!hostname) {
+    for (var i=0; i<interfaces.en1.length; i++) {
+      if (interfaces.en1[i].family === 'IPv4') {
+        hostname = interfaces.en1[i].address;
+        break;
+      }
+    }
   }
 
   server.listen(53, hostname, function () {
